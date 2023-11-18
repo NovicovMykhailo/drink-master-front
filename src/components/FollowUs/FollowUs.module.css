@@ -1,0 +1,19 @@
+.followUs_title {
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: -20px;
+}
+
+.followUs_Container {
+  margin-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .followUs_title {
+    font-size: 24px;
+  }
+}

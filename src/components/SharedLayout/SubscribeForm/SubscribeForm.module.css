@@ -1,0 +1,114 @@
+.subscribeBlock {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscribeBlockText {
+  padding: 0;
+  margin: 0;
+  text-align: justify;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.subscribeBlockInput {
+  width: 100%;
+  height: 54px;
+  border-radius: 200px;
+  margin-bottom: 18px;
+  border: 1px solid #f3f3f333;
+  box-sizing: border-box;
+  background-color: inherit;
+  color: #ffffff;
+  padding: 18px 24px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(18 / 14);
+  transition: all 0.2s ease;
+}
+
+.subscribeBlockInput::placeholder {
+  /* color: rgb(255, 255, 255); */
+  color: rgba(243, 243, 243, 0.5);
+  opacity: 1;
+}
+.subscribeBlockInput:focus,
+.subscribeBlockInput:hover,
+.subscribeBlockInput:active  {
+  outline: none;
+  color: #f3f3f3;
+  border-color: rgba(243, 243, 243, 0.5);
+  background-color: transparent;
+}
+
+
+
+.subscribeBlockButton {
+  width: 100%;
+  height: 54px;
+  border-radius: 200px;
+  margin-bottom: 18px;
+  border: 1px solid #f3f3f333;
+  box-sizing: border-box;
+  background-color: inherit;
+  color: #f3f3f3;
+  padding: 18px 24px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.subscribeBlockButton:hover,
+.subscribeBlockButton:focus {
+  border: 1px solid  rgba(243, 243, 243, 0.5);
+  transform: scale(1.03);
+}
+
+@media screen and (min-width: 375px) {
+  .subscribeBlock {
+    width: 309px;
+    font-size: 14px;
+    line-height: calc(20 / 14);
+  }
+
+  .subscribeBlockText {
+    font-size: 14px;
+    line-height: calc(20 / 14);
+  }
+
+  .subscribeBlockInput {
+    width: 335px;
+  }
+
+  .subscribeBlockButton {
+    width: 335px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .subscribeBlock {
+    font-size: 18px;
+    line-height: calc(38 / 32);
+  }
+
+  .subscribeBlockText {
+    font-size: 18px;
+    line-height: calc(38 / 32);
+  }
+
+  .subscribeBlockInput {
+    width: 309px;
+    padding: 14px 24px;
+    font-size: 17px;
+    line-height: calc(26 / 14);
+  }
+
+  .subscribeBlockButton {
+    width: 309px;
+    padding: 14px 24px;
+  }
+}

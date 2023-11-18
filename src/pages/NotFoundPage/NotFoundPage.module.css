@@ -1,0 +1,45 @@
+.notFoundContainer {
+  min-width: 335px;
+  min-height: 693px;
+}
+@media screen and (min-width: 768px) {
+  .notFoundContainer {
+    min-width: 704px;
+    min-height: 740px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .notFoundContainer {
+    min-width: 1240px;
+  }
+}
+.textContainer {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 120px;
+}
+@media screen and (min-width: 768px) {
+  .textContainer {
+    top: 25%;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .textContainer {
+    top: 21%;
+  }
+}
+.span {
+  font-size: 120px;
+  line-height: calc(120 / 123);
+  font-weight: 600;
+  color: rgba(243, 243, 243, 0.1);
+}
+@media screen and (min-width: 768px) {
+  .span {
+    font-size: 150px;
+    line-height: calc(150 / 123);
+  }
+}

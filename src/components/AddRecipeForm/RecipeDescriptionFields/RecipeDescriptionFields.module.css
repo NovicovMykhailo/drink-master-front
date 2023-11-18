@@ -1,0 +1,218 @@
+.recipeDescriptionFields {
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+    margin-top: 12px;
+  }
+}
+
+.recipeDescription_showImgContainerActive {
+  width: 320px;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+
+
+}
+.recipeDescription_showImg {
+  object-fit: cover;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.recipeDescription_inputImg {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.recipeDescription_addImgIcon {
+  width: 50px;
+  height: 50px;
+  color: #ffffff;
+  margin-top: 35%;
+}
+
+.loadingIcon {
+  align-items: center;
+  margin-top: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.recipeDescription_addImgDescr {
+  margin: 18px;
+  padding: 0;
+  font-size: 16px;
+  height: 30px;
+  color: white;
+}
+
+.recipeDescription_labelImg {
+  margin-bottom: 40px;
+  height: 320px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  transition: all 0.18s ease-in-out;
+  overflow: hidden;
+
+  color: #333;
+  background-color: #161f3780;
+}
+
+.recipeDescription_labelImg:hover,
+.recipeDescription_labelImg:focus {
+  border: 1px solid #ffffff;
+}
+
+.recipeDescriptionFields_label {
+  margin-bottom: 5px;
+  display: inline-block;
+  position: relative;
+}
+
+.recipeDescriptionFields_input {
+  width: 100%;
+  background-color: #0044ff00;
+  border: none;
+  border-bottom: 1px solid #f3f3f380;
+  color: #f3f3f3e0;
+  font-size: 16px;
+  height: 41px;
+  margin-bottom: 40px;
+  outline-style: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.recipeDescriptionFields_input::placeholder {
+  display: none;
+}
+
+.recipeDescriptionFields_input::-webkit-autofill,
+.recipeDescriptionFields_input:-webkit-autofill:hover,
+.recipeDescriptionFields_input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: aqua;
+}
+
+.recipeDescriptionFields_labelContent {
+  box-sizing: border-box;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: none;
+  transition: 0.3 all;
+  transform-origin: left center;
+  transition: 0.3s all;
+  color: #f3f3f380;
+  font-size: 16px;
+}
+
+.recipeDescriptionFields_input:focus + .recipeDescriptionFields_labelContent,
+.recipeDescriptionFields_input:not(:placeholder-shown) + .recipeDescriptionFields_labelContent {
+  transform: translateY(-130%) translateX(0);
+}
+
+.recipeDescriptionFields_labelSelect {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+
+.recipeDescriptionFields_select {
+  position: absolute;
+  right: 0;
+  /* background-color: rgba(0, 0, 0, 0); */
+  background-color: #161f37;
+
+  color: #ffffff;
+
+  border: none;
+  width: 165px;
+  /* margin-bottom: 3px; */
+  text-align: right;
+  padding-right: 5px;
+}
+
+.recipeDescriptionFields_select::-ms-expand {
+  display: none;
+}
+
+.recipeDescriptionFields_option {
+  color: white;
+  background-color: darken(#161f3700, 5);
+}
+
+.recipeDescriptionFields_option:hover,
+.recipeDescriptionFields_option {
+  background: #161f3700;
+}
+
+@media screen and (min-width: 375px) {
+  .recipeDescription_labelImg {
+    width: 335px;
+  }
+  .recipeDescription_showImgContainerActive {
+    width: 335px;
+  }
+  .recipeDescriptionFields_input {
+    width: 325px;
+  }
+  .recipeDescriptionFields_labelSelect {
+    width: 325px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .recipeDescriptionSection {
+    display: flex;
+    align-items: flex-start;
+  }
+  .recipeDescription_showImgContainerActive {
+    margin-bottom: 0;
+    width: 320px;
+    height: 320px;
+  }
+  .recipeDescriptionFields {
+    margin-left: 32px;
+  }
+  .recipeDescription_addImgIcon {
+    margin-top: 40%;
+  }
+  .recipeDescription_labelImg {
+    margin-bottom: 0;
+    width: 320px;
+    height: 320px;
+  }
+  .recipeDescriptionFields_input {
+    width: 352px;
+  }
+  .recipeDescriptionFields_labelSelect {
+    width: 352px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .recipeDescriptionFields {
+    margin-left: 40px;
+  }
+  .recipeDescriptionFields_input {
+    width: 393px;
+  }
+  .recipeDescriptionFields_labelSelect {
+    width: 393px;
+  }
+}
