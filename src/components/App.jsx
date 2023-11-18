@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/Auth/authOperation';
 import LoginPage from '../pages/LogInPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
-import { writeToLoaclStore } from 'helpers/localStorageApi';
+import { readFromLocalStore, writeToLoaclStore } from 'helpers/localStorageApi';
 
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
@@ -32,8 +32,16 @@ export const App = () => {
   }
 
   MouseSmooth({ time: 1000, size: 100 });
-  writeToLoaclStore('cache', { isExists: false, data: null });
 
+  useEffect(() => {
+    if (!readFromLocalStore('cache')) {
+      writeToLoaclStore('cache', { isExists: false, data: null });
+
+    }
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
   useEffect(() => {
