@@ -4,7 +4,6 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 // import { useParams } from 'react-router-dom/dist';
 import Select from 'react-select';
 // components
-import Dots from 'components/Spinner/Dots';
 import { Paginator } from 'components/Paginator/Paginator';
 import { SearchSvg } from './additionalComponents';
 import DrinkItemCard from './DrinkItemCard/DrinkItemCard';

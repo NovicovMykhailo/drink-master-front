@@ -6,7 +6,7 @@ import { MainTitle } from 'components/MainTitle/MainTitle';
 import { RecipesList } from 'components/RecipesList/RecipesList';
 import { Paginator } from 'components/Paginator/Paginator';
 import { NoRecipe } from 'components/NoRecipe/NoRecipe';
-import Dots from 'components/Spinner/Dots';
+
 // redux
 import { getFavoriteRecipes, getFavPage, getIsLoading, getTotalPages } from 'redux/FavoriteCocktails/FavoritesSelectors';
 import { deleteFavorites, fetchFavorites } from 'redux/FavoriteCocktails/FavoritesOperation';

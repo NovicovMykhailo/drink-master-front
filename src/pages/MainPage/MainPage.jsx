@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect,  useState } from 'react';
 import css from './MainPage.module.css';
 
 import MainHero from './MainHero';
