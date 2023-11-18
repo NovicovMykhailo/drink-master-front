@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/Auth/authOperation';
 import LoginPage from '../pages/LogInPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import { writeToLoaclStore } from 'helpers/localStorageApi';
 
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
@@ -31,6 +32,7 @@ export const App = () => {
   }
 
   MouseSmooth({ time: 1000, size: 100 });
+  writeToLoaclStore('cache', { isExists: false, data: null });
 
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();

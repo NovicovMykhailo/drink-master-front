@@ -88,9 +88,6 @@ export const DrinksSearch = ({ search, updateState }) => {
     if (readFromLocalStore('cache') && !cachedData?.isExists) {
       const { isExists, data } = readFromLocalStore('cache');
       setCachedData({ isExists, data });
-    }else{
-      setCachedData({ isExists: false, data: null });
-      writeToLoaclStore('cache', { isExists: false, data: null });
     }
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
