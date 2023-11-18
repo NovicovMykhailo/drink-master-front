@@ -38,19 +38,7 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   navigate(location.pathname, { relative: 'path' });
-  // }, [location.pathname, navigate]);
 
-
-// useEffect(() => {
-//           navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'))
-//           window.onbeforeunload = () => {
-//               window.sessionStorage.setItem('lastRoute', JSON.stringify(window.location.pathname))
-//           }
-//           return () => window.sessionStorage.setItem('lastRoute', "");
-//       // eslint-disable-next-line react-hooks/exhaustive-deps
-//       }, [])
 
 useEffect(() => {
   navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'));
@@ -74,7 +62,6 @@ useEffect(() => {
       <Route path="/" element={<Private component={<SharedLayout />} />}>
         <Route path="main" element={<Private component={<MainPage />} />} />
         <Route path="drinks" element={<Private component={<DrinksPage param={data} updateState={handleData}/>} />} />
-        {/* <Route path="drinks/:categoryName" element={<Private component={<DrinksPage />} />} /> */}
         <Route path="add" element={<Private component={<AddRecipePage />} />} />
         <Route path="recipe/:recipeId" element={<Private component={<RecipePage />} />} />
         <Route path="my" element={<Private component={<MyRecipesPage />} />} />
