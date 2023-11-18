@@ -85,7 +85,7 @@ export const DrinksSearch = ({ search, updateState }) => {
   }, []);
 
   useEffect(() => {
-    if (readFromLocalStore('cache') && !cachedData.isExists) {
+    if (readFromLocalStore('cache') && !cachedData?.isExists) {
       const { isExists, data } = readFromLocalStore('cache');
       setCachedData({ isExists, data });
     }
@@ -165,8 +165,8 @@ export const DrinksSearch = ({ search, updateState }) => {
           onChange={e => handleIngredientChange(e)}
         />
       </form>
-      {/* {isLoading && !cachedData.isExists && <Dots className={css.loading} />} */}
-      {entities?.length > 0 && !isLoading && !isHasBeenPrevParams.current && !cachedData.isExists && (
+
+      {entities?.length > 0 && !isLoading && !isHasBeenPrevParams.current && !cachedData?.isExists && (
         <ul className={css.drinkCardContainer}>
           {entities.map(({ _id, drink, drinkThumb, ingredients }) => (
             <DrinkItemCard key={_id} drink={drink} drinkThumb={drinkThumb} id={_id} popup={ingredients} />
@@ -178,7 +178,7 @@ export const DrinksSearch = ({ search, updateState }) => {
           <NoRecipe title={'No results'} />
         </div>
       )}
-      {cachedData.isExists && (
+      {cachedData?.isExists && (
         <ul className={css.drinkCardContainer}>
           {cachedData.data.map(({ _id, drink, drinkThumb, ingredients }) => (
             <DrinkItemCard key={_id} drink={drink} drinkThumb={drinkThumb} id={_id} popup={ingredients} />
