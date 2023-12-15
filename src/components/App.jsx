@@ -1,6 +1,7 @@
 import { lazy, useEffect, useState } from 'react';
-import { Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+// import { Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 import { MouseSmooth } from 'react-mouse-smooth';
 import { getObjFromParams } from './DrinksSearch/helpers';
 
@@ -25,8 +26,8 @@ const MyRecipesPage = lazy(() => import('../pages/MyRecipesPage/MyRecipesPage'))
 const FavoritePage = lazy(() => import('../pages/FavoritePage/FavoritePage'));
 
 export const App = () => {
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+  // const navigate = useNavigate();
+  // const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
 
   const [data, setData] = useState(getObjFromParams(searchParams));
@@ -50,13 +51,13 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  useEffect(() => {
-    navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'));
-    window.onbeforeunload = () => {
-      window.sessionStorage.setItem('lastRoute', JSON.stringify(pathname.substring(1)));
-    };
-    return () => window.sessionStorage.setItem('lastRoute', '');
-  }, [navigate, pathname]);
+  // useEffect(() => {
+  //   navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'));
+  //   window.onbeforeunload = () => {
+  //     window.sessionStorage.setItem('lastRoute', JSON.stringify(pathname.substring(1)));
+  //   };
+  //   return () => window.sessionStorage.setItem('lastRoute', '');
+  // }, [navigate, pathname]);
 
   return isRefreshing ? (
     <Spinner />
