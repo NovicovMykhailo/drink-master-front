@@ -26,42 +26,37 @@ const FavoritePage = lazy(() => import('../pages/FavoritePage/FavoritePage'));
 
 export const App = () => {
   const navigate = useNavigate();
-  const {pathname, search} = useLocation();
-  // console.log('App -> pathname', pathname)
-  // console.log('App -> search', search)
-  const [data, setData] = useState(string2Params(search))
-  const handleData = (data)=>{
-    setData(data)
-  }
+  const { pathname, search } = useLocation();
+  console.log('App -> pathname', pathname);
+  console.log('App -> search', search);
+  const [data, setData] = useState(search.indexOf('?/') === -1 && string2Params(search));
+  const handleData = data => {
+    setData(data);
+  };
 
   MouseSmooth({ time: 1000, size: 100 });
 
   useEffect(() => {
     if (!readFromLocalStore('cache')) {
       writeToLoaclStore('cache', { isExists: false, data: null });
-
     }
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-
-
-useEffect(() => {
-  navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'));
-  window.onbeforeunload = () => {
-    window.sessionStorage.setItem('lastRoute', JSON.stringify(pathname));
-  };
-  return () => window.sessionStorage.setItem('lastRoute', '');
-}, [navigate, pathname]);
-
-
+  useEffect(() => {
+    navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'));
+    window.onbeforeunload = () => {
+      window.sessionStorage.setItem('lastRoute', JSON.stringify(pathname.substring(1)));
+    };
+    return () => window.sessionStorage.setItem('lastRoute', '');
+  }, [navigate, pathname]);
 
   return isRefreshing ? (
     <Spinner />
@@ -74,7 +69,7 @@ useEffect(() => {
       </Route>
       <Route path="/" element={<Private component={<SharedLayout />} />}>
         <Route path="main" element={<Private component={<MainPage />} />} />
-        <Route path="drinks" element={<Private component={<DrinksPage param={data} updateState={handleData}/>} />} />
+        <Route path="drinks" element={<Private component={<DrinksPage param={data} updateState={handleData} />} />} />
         <Route path="add" element={<Private component={<AddRecipePage />} />} />
         <Route path="recipe/:recipeId" element={<Private component={<RecipePage />} />} />
         <Route path="my" element={<Private component={<MyRecipesPage />} />} />
