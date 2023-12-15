@@ -25,9 +25,10 @@ export function getObjFromParams(searchParams) {
   return params;
 }
 export function string2Params(string){
-  if(string === '?/drinks') return null
+  if(string.indexOf('?/') !== -1) return null
   console.log("string", string)
-  return JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+  const result = JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+  return result
 }
 
 export function findCategory(string, category){
