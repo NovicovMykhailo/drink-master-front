@@ -2,6 +2,7 @@ import { lazy, useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { MouseSmooth } from 'react-mouse-smooth';
+import { string2Params } from './DrinksSearch/helpers';
 
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { Spinner } from './Spinner/Spinner';
@@ -26,7 +27,9 @@ const FavoritePage = lazy(() => import('../pages/FavoritePage/FavoritePage'));
 export const App = () => {
   const navigate = useNavigate();
   const {pathname, search} = useLocation();
-  const [data, setData] = useState(search)
+  // console.log('App -> pathname', pathname)
+  // console.log('App -> search', search)
+  const [data, setData] = useState(string2Params(search))
   const handleData = (data)=>{
     setData(data)
   }

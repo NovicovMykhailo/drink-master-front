@@ -25,22 +25,12 @@ export function getObjFromParams(searchParams) {
   return params;
 }
 export function string2Params(string){
-  console.log("string", string)
-
-  if(string.indexOf('?/') !== -1) {
-    string.replace('?/drinks', 'drinks?').replace('~and~','&')
-    console.log("NormalizedString", string)
-    const result = JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
-    console.log("result", result)
-
-  }else{
-    const result = JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
-    console.log("result", result)
-    return result
-  }
-
-
-
+  if(string === '') return
+  const normalizedString =  string.replace('drinks&', "?").replaceAll('~and~', "&").replaceAll('%2F','/')
+  console.log("string", normalizedString)
+  const result = JSON.parse('{"' + decodeURI(normalizedString.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+  console.log("result", result)
+  return result
 }
 
 export function findCategory(string, category){

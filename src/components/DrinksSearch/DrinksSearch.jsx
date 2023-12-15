@@ -12,7 +12,7 @@ import { NoRecipe } from 'components/NoRecipe/NoRecipe';
 import { fetchCategories, fetchDrinks, fetchIngredients } from 'redux/Drinks/DrinksOperation';
 import { changeDrinksPage } from 'redux/Drinks/DrinksSlice';
 //helping functions
-import { categoryOptions, ingredientOptions, filteredParams, getObjFromParams, string2Params, findCategory } from './helpers';
+import { categoryOptions, ingredientOptions, filteredParams, getObjFromParams, findCategory } from './helpers';
 import { readFromLocalStore, writeToLoaclStore } from 'helpers/localStorageApi';
 // hooks
 import useDrinks from 'hooks/useDrinks';
@@ -26,14 +26,12 @@ export const DrinksSearch = ({ search, updateState }) => {
   const isMounted = useRef(false);
   const isHasBeenPrevParams = useRef(false);
 
-  console.log("search", search)
-
-
+  console.log('search', search);
 
   const { categoryList, ingredientList, isLoading, entities, totalPages, currentPage } = useDrinks();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [prevParams, setPrevParams] = useState(search ? string2Params(search?.replace('+', ' ')) : null);
-  console.log("prevParams", prevParams)
+  const [prevParams, setPrevParams] = useState(search ? search : null);
+  // const [prevParams, setPrevParams] = useState(search !== '' ? string2Params(search?.replace('+', ' ')) : null);
 
   const [category, setCategory] = useState('');
   const [ingredient, setIngredient] = useState('');
@@ -48,7 +46,7 @@ export const DrinksSearch = ({ search, updateState }) => {
   useEffect(() => {
     if (prevParams) {
       //logic
-     
+
       setCachedData({ isExists: false, data: null });
       writeToLoaclStore('cache', { isExists: false, data: null });
       isHasBeenPrevParams.current = true;
@@ -61,7 +59,6 @@ export const DrinksSearch = ({ search, updateState }) => {
       isHasBeenPrevParams.current = false;
     } else {
       if (state?.category) {
-    
         setCachedData({ isExists: false, data: null });
         writeToLoaclStore('cache', { isExists: false, data: null });
         setCategory(state.category);
@@ -93,8 +90,8 @@ export const DrinksSearch = ({ search, updateState }) => {
       const { isExists, data } = readFromLocalStore('cache');
       setCachedData({ isExists, data });
     }
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //Change search form
@@ -137,7 +134,6 @@ export const DrinksSearch = ({ search, updateState }) => {
     setSearchParams({ q: e.target.value });
   };
 
-
   return (
     <div>
       <form className={css.drinkRequestForm}>
@@ -170,7 +166,6 @@ export const DrinksSearch = ({ search, updateState }) => {
           onChange={e => handleIngredientChange(e)}
         />
       </form>
-
 
       {entities?.length > 0 && !isLoading && !isHasBeenPrevParams.current && !cachedData?.isExists && (
         <ul className={css.drinkCardContainer}>
