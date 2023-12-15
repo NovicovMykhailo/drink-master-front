@@ -133,6 +133,7 @@ export const DrinksSearch = ({ search, updateState }) => {
     setSearchParams({ q: e.target.value });
   };
 
+
   return (
     <div>
       <form className={css.drinkRequestForm}>
@@ -165,6 +166,7 @@ export const DrinksSearch = ({ search, updateState }) => {
           onChange={e => handleIngredientChange(e)}
         />
       </form>
+
 
       {entities?.length > 0 && !isLoading && !isHasBeenPrevParams.current && !cachedData?.isExists && (
         <ul className={css.drinkCardContainer}>

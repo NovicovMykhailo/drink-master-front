@@ -121,7 +121,7 @@ export const RecipeDescriptionFields = ({ drinkThumb, cocktailImg, itemTitle, ab
           className={s.recipeDescription_inputImg}
           id="cocktailImg"
           name="cocktailImg"
-          accept=".jpg, .jpeg, .png"
+          accept="image/jpeg, image/png"
           multiple
           onChange={cocktailImg}
         />
