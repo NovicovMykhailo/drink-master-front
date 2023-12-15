@@ -27,13 +27,13 @@ export const DrinksSearch = ({ search, updateState }) => {
   const isHasBeenPrevParams = useRef(false);
 
   console.log("search", search)
-  console.log("prevParams", prevParams)
+
 
 
   const { categoryList, ingredientList, isLoading, entities, totalPages, currentPage } = useDrinks();
   const [searchParams, setSearchParams] = useSearchParams();
   const [prevParams, setPrevParams] = useState(search ? string2Params(search?.replace('+', ' ')) : null);
-
+  console.log("prevParams", prevParams)
 
   const [category, setCategory] = useState('');
   const [ingredient, setIngredient] = useState('');
