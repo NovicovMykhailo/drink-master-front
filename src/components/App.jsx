@@ -1,8 +1,8 @@
 import { lazy, useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { MouseSmooth } from 'react-mouse-smooth';
-import { string2Params } from './DrinksSearch/helpers';
+import { getObjFromParams } from './DrinksSearch/helpers';
 
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { Spinner } from './Spinner/Spinner';
@@ -26,15 +26,15 @@ const FavoritePage = lazy(() => import('../pages/FavoritePage/FavoritePage'));
 
 export const App = () => {
   const navigate = useNavigate();
-  const { pathname, search } = useLocation();
-  console.log('App -> pathname', pathname);
-  console.log('App -> search', search);
-  const [data, setData] = useState(search.indexOf('?/') === -1 && string2Params(search));
+  const { pathname } = useLocation();
+  const [searchParams] = useSearchParams();
+
+  const [data, setData] = useState(getObjFromParams(searchParams));
   const handleData = data => {
     setData(data);
   };
 
-  MouseSmooth({ time: 1000, size: 100 });
+  // MouseSmooth({ time: 1000, size: 100 });
 
   useEffect(() => {
     if (!readFromLocalStore('cache')) {
