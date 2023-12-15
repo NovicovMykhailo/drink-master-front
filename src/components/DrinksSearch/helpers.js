@@ -25,9 +25,16 @@ export function getObjFromParams(searchParams) {
   return params;
 }
 export function string2Params(string){
-  if(string.indexOf('?/') !== -1) return null
   console.log("string", string)
+
+  if(string.indexOf('?/') !== -1) {
+    string.replace('?/drinks', 'drinks?')
+    string.replace('~and~','&')
+
+  }
+  console.log("NormalizedString", string)
   const result = JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+  console.log("result", result)
   return result
 }
 
