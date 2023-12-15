@@ -25,6 +25,7 @@ export function getObjFromParams(searchParams) {
   return params;
 }
 export function string2Params(string){
+  if(string === '?/drinks') return null
   console.log("string", string)
   return JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
 }
