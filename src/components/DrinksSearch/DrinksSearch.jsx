@@ -32,7 +32,6 @@ export const DrinksSearch = ({ search, updateState }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [prevParams, setPrevParams] = useState(search ? search : null);
 
-
   const [category, setCategory] = useState('');
   const [ingredient, setIngredient] = useState('');
   const [q, setQ] = useState('');
@@ -57,23 +56,22 @@ export const DrinksSearch = ({ search, updateState }) => {
       prevParams.page && dispatch(changeDrinksPage(Number(prevParams.page)));
       dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
       isHasBeenPrevParams.current = false;
+    } else if (state?.category) {
+      setCachedData({ isExists: false, data: null });
+      writeToLoaclStore('cache', { isExists: false, data: null });
+      setCategory(state.category);
+      searchParams.set('category', category);
+      setSearchParams(searchParams);
+      dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
     } else {
-      if (state?.category) {
-        setCachedData({ isExists: false, data: null });
-        writeToLoaclStore('cache', { isExists: false, data: null });
-        setCategory(state.category);
-        searchParams.set('category', category);
-        setSearchParams(searchParams);
-        dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
-      } else {
-        dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
-      }
+      dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
     }
 
     // делает запрос за категориями и ингридиентами
     if (categoryList.length === 0) dispatch(fetchCategories());
     if (ingredientList.length === 0) dispatch(fetchIngredients());
 
+    // caching on leave page 
     return () => {
       setPrevParams({});
       dispatch(changeDrinksPage(1));

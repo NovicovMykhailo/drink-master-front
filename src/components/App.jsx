@@ -34,7 +34,7 @@ export const App = () => {
     setData(data);
   };
 
-  // MouseSmooth({ time: 1000, size: 100 });
+  MouseSmooth({ time: 1000, size: 100 });
 
   useEffect(() => {
     if (!readFromLocalStore('cache')) {
