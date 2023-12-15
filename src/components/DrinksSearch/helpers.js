@@ -28,14 +28,19 @@ export function string2Params(string){
   console.log("string", string)
 
   if(string.indexOf('?/') !== -1) {
-    string.replace('?/drinks', 'drinks?')
-    string.replace('~and~','&')
+    string.replace('?/drinks', 'drinks?').replace('~and~','&')
+    console.log("NormalizedString", string)
+    const result = JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+    console.log("result", result)
 
+  }else{
+    const result = JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+    console.log("result", result)
+    return result
   }
-  console.log("NormalizedString", string)
-  const result = JSON.parse('{"' + decodeURI(string.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
-  console.log("result", result)
-  return result
+
+
+
 }
 
 export function findCategory(string, category){
