@@ -67,7 +67,7 @@ const ModalCard = ({ closePopup }) => {
           <button className={css.addAvatar} onClick={onClick}>
             <MdAdd className={css.addAvatarIcon} />
           </button>
-          <input type="file" accept="image/jpeg" onChange={onPhotoChange} ref={hiddenFileInput} style={{ display: 'none' }} name="avatarURL" />
+          <input type="file" onChange={onPhotoChange} ref={hiddenFileInput} style={{ display: 'none' }} name="avatarURL" />
         </div>
         <input
           type="text"

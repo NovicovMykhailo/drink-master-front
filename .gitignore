@@ -6,7 +6,6 @@
 
 # dependencies
 /node_modules
-/unused
 /.pnp
 .pnp.js
 
