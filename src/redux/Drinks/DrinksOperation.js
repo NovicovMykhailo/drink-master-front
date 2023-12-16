@@ -16,7 +16,6 @@ export const fetchDrinks = createAsyncThunk( 'drinks/fetchDrinks', async ({ cate
     };
 
     const normanizedQuery = filteredQuery(query)
-    console.log('normanizedQuery', normanizedQuery)
     const params = new URLSearchParams(normanizedQuery);
 
     try {
