@@ -2,7 +2,7 @@ import { lazy, useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { MouseSmooth } from 'react-mouse-smooth';
+// import { MouseSmooth } from 'react-mouse-smooth';
 
 
 import { SharedLayout } from './SharedLayout/SharedLayout';
@@ -15,6 +15,7 @@ import { refreshUser } from 'redux/Auth/authOperation';
 import LoginPage from '../pages/LogInPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import { readFromLocalStore, writeToLoaclStore } from 'helpers/localStorageApi';
+import { string2Params } from './DrinksSearch/helpers';
 
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
@@ -27,15 +28,15 @@ const FavoritePage = lazy(() => import('../pages/FavoritePage/FavoritePage'));
 
 export const App = () => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, search} = useLocation();
   // const [searchParams] = useSearchParams();
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(search !=="" && string2Params(search));
   const handleData = data => {
     setData(data);
   };
 
-  MouseSmooth({ time: 1000, size: 100 });
+  // MouseSmooth({ time: 1000, size: 100 });
 
   useEffect(() => {
     if (!readFromLocalStore('cache')) {

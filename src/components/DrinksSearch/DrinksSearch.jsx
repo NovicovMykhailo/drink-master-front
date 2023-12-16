@@ -31,6 +31,7 @@ export const DrinksSearch = ({ search, updateState }) => {
   const { categoryList, ingredientList, isLoading, entities, totalPages, currentPage } = useDrinks();
   const [searchParams, setSearchParams] = useSearchParams();
   const [prevParams, setPrevParams] = useState(search ? search : null);
+  // console.log('DrinksSearch -> prevParams', prevParams);
 
   const [category, setCategory] = useState('');
   const [ingredient, setIngredient] = useState('');
@@ -56,37 +57,45 @@ export const DrinksSearch = ({ search, updateState }) => {
       prevParams.page && dispatch(changeDrinksPage(Number(prevParams.page)));
       dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
       isHasBeenPrevParams.current = false;
-    } else if (state?.category) {
-      setCachedData({ isExists: false, data: null });
-      writeToLoaclStore('cache', { isExists: false, data: null });
-      setCategory(state.category);
-      searchParams.set('category', category);
-      setSearchParams(searchParams);
-      dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
+      console.log("rendering inside prevParams >  useEffect")
     } else {
-      dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
+      if (state?.category) {
+        setCachedData({ isExists: false, data: null });
+        writeToLoaclStore('cache', { isExists: false, data: null });
+        setCategory(state.category);
+        searchParams.set('category', category);
+        setSearchParams(searchParams);
+        dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
+        console.log("rendering inside prevParams > state?.category > useEffect")
+      } else {
+        dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
+        console.log("rendering inside prevParams > else > useEffect")
+      }
     }
 
     // делает запрос за категориями и ингридиентами
     if (categoryList.length === 0) dispatch(fetchCategories());
     if (ingredientList.length === 0) dispatch(fetchIngredients());
 
-    // caching on leave page 
+    // caching on leave page
     return () => {
       setPrevParams({});
       dispatch(changeDrinksPage(1));
       dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
       writeToLoaclStore('cache', { isExists: true, data: entities });
-
+      console.log("render inside leave page 'caching...'")
       updateState('');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+
   useEffect(() => {
     if (readFromLocalStore('cache') && !cachedData?.isExists) {
       const { isExists, data } = readFromLocalStore('cache');
       setCachedData({ isExists, data });
+      console.log("rendering inside read cache useEffect")
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -106,6 +115,7 @@ export const DrinksSearch = ({ search, updateState }) => {
       dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
       writeToLoaclStore('cache', { isExists: false, data: null });
       setCachedData({ isExists: false, data: null });
+      console.log("render Inside search form Useeffect")
     }
     isMounted.current = true;
 
@@ -117,6 +127,7 @@ export const DrinksSearch = ({ search, updateState }) => {
   const handleCategoryChange = e => {
     dispatch(changeDrinksPage(1));
     setSearchParams({ category: e.value });
+    console.log("render Inside hanglers Categories Useeffect")
     setCategory(e.value);
   };
   // hanglers Ingredients
@@ -124,12 +135,16 @@ export const DrinksSearch = ({ search, updateState }) => {
     dispatch(changeDrinksPage(1));
     setSearchParams({ ingredient: e.value });
     setIngredient(e.value);
+
+    setCategory(e.value);
+    console.log("render Inside hanglers Ingredients Useeffect")
   };
   // hanglers Query
   const handleQChange = e => {
     dispatch(changeDrinksPage(1));
     setQ(e.target.value);
     setSearchParams({ q: e.target.value });
+    console.log("render Inside hanglers q Useeffect")
   };
 
   return (
