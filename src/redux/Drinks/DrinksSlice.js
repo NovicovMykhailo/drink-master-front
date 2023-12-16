@@ -3,11 +3,12 @@ import { fetchCategories, fetchDrinks, fetchIngredients } from './DrinksOperatio
 
 const handlePending = state => {
   state.isLoading = true;
+  state.error = null;
 };
 
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
-  state.entities = payload;
+  state.error = payload;
 };
 
 const drinksSlice = createSlice({

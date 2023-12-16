@@ -6,12 +6,7 @@ import setAuthHeader from 'helpers/axiosHedder';
 
 axios.defaults.baseURL = 'https://drink-master-back-end.onrender.com/';
 
-export const fetchDrinks = createAsyncThunk(
-  'drinks/fetchDrinks',
-
-  async ({ category, ingredient, q, page}, { getState, rejectWithValue }) => {
-    const state = getState();
-    const persistedToken = state.auth.token;
+export const fetchDrinks = createAsyncThunk( 'drinks/fetchDrinks', async ({ category, ingredient, q, page}, { getState, rejectWithValue }) => {
 
     const query = {
       ingrdient: ingredient ? ingredient : null,
@@ -21,9 +16,12 @@ export const fetchDrinks = createAsyncThunk(
     };
 
     const normanizedQuery = filteredQuery(query)
+    console.log('normanizedQuery', normanizedQuery)
     const params = new URLSearchParams(normanizedQuery);
 
     try {
+      const state = getState();
+      const persistedToken = state.auth.token;
       setAuthHeader(persistedToken);
 
       const response = await axios.get(`api/search?${params}`);
