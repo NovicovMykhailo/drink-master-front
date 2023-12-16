@@ -1,4 +1,4 @@
-import { lazy, useEffect, useState } from 'react';
+import { lazy, useEffect } from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { Route, Routes, useNavigate } from 'react-router-dom';
@@ -15,7 +15,7 @@ import { refreshUser } from 'redux/Auth/authOperation';
 import LoginPage from '../pages/LogInPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import { readFromLocalStore, writeToLoaclStore } from 'helpers/localStorageApi';
-import { string2Params } from './DrinksSearch/helpers';
+// import { string2Params } from './DrinksSearch/helpers';
 
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
@@ -28,13 +28,13 @@ const FavoritePage = lazy(() => import('../pages/FavoritePage/FavoritePage'));
 
 export const App = () => {
   const navigate = useNavigate();
-  const { pathname, search} = useLocation();
+  const { pathname} = useLocation();
   // const [searchParams] = useSearchParams();
 
-  const [data, setData] = useState(search !=="" && string2Params(search));
-  const handleData = data => {
-    setData(data);
-  };
+  // const [data, setData] = useState(search !=="" && string2Params(search));
+  // const handleData = data => {
+  //   setData(data);
+  // };
 
   // MouseSmooth({ time: 1000, size: 100 });
 
@@ -71,7 +71,7 @@ export const App = () => {
       </Route>
       <Route path="/" element={<Private component={<SharedLayout />} />}>
         <Route path="main" element={<Private component={<MainPage />} />} />
-        <Route path="drinks" element={<Private component={<DrinksPage param={data} updateState={handleData} />} />} />
+        <Route path="drinks" element={<Private component={<DrinksPage/>} />} />
         <Route path="add" element={<Private component={<AddRecipePage />} />} />
         <Route path="recipe/:recipeId" element={<Private component={<RecipePage />} />} />
         <Route path="my" element={<Private component={<MyRecipesPage />} />} />

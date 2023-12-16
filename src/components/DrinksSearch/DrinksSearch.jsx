@@ -12,7 +12,7 @@ import { NoRecipe } from 'components/NoRecipe/NoRecipe';
 import { fetchCategories, fetchDrinks, fetchIngredients } from 'redux/Drinks/DrinksOperation';
 import { changeDrinksPage } from 'redux/Drinks/DrinksSlice';
 //helping functions
-import { categoryOptions, ingredientOptions, filteredParams, getObjFromParams, findCategory } from './helpers';
+import { categoryOptions, ingredientOptions, filteredParams, getObjFromParams} from './helpers';
 import { readFromLocalStore, writeToLoaclStore } from 'helpers/localStorageApi';
 // hooks
 import useDrinks from 'hooks/useDrinks';
@@ -21,7 +21,7 @@ import useWindowSize from 'hooks/useWindowSize';
 import { selectStylesCoktails, selectStylesIngredients } from './selectStyles';
 import css from './DrinksSearch.module.css';
 
-export const DrinksSearch = ({ search, updateState }) => {
+export const DrinksSearch = () => {
   const dispatch = useDispatch();
   const isMounted = useRef(false);
   const isHasBeenPrevParams = useRef(false);
@@ -30,7 +30,7 @@ export const DrinksSearch = ({ search, updateState }) => {
 
   const { categoryList, ingredientList, isLoading, entities, totalPages, currentPage } = useDrinks();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [prevParams, setPrevParams] = useState(search ? search : null);
+  // const [prevParams, setPrevParams] = useState(search ? search : null);
   // console.log('DrinksSearch -> prevParams', prevParams);
 
   const [category, setCategory] = useState('');
@@ -44,21 +44,21 @@ export const DrinksSearch = ({ search, updateState }) => {
 
   //init and reset on leave page and handle prevParams if they existed
   useEffect(() => {
-    if (prevParams) {
-      //logic
+    // if (prevParams) {
+    //   //logic
 
-      setCachedData({ isExists: false, data: null });
-      writeToLoaclStore('cache', { isExists: false, data: null });
-      isHasBeenPrevParams.current = true;
-      setSearchParams(prevParams);
-      prevParams.category && setCategory(findCategory(prevParams.category, categoryOptions(categoryList)).value || '');
-      prevParams.ingredient && setIngredient(findCategory(prevParams.ingredient, ingredientOptions(ingredientList)).value || '');
-      prevParams.q && setQ(prevParams.q || '');
-      prevParams.page && dispatch(changeDrinksPage(Number(prevParams.page)));
-      dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
-      isHasBeenPrevParams.current = false;
-      console.log("rendering inside prevParams >  useEffect")
-    } else {
+    //   setCachedData({ isExists: false, data: null });
+    //   writeToLoaclStore('cache', { isExists: false, data: null });
+    //   isHasBeenPrevParams.current = true;
+    //   setSearchParams(prevParams);
+    //   prevParams.category && setCategory(findCategory(prevParams.category, categoryOptions(categoryList)).value || '');
+    //   prevParams.ingredient && setIngredient(findCategory(prevParams.ingredient, ingredientOptions(ingredientList)).value || '');
+    //   prevParams.q && setQ(prevParams.q || '');
+    //   prevParams.page && dispatch(changeDrinksPage(Number(prevParams.page)));
+    //   dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
+    //   isHasBeenPrevParams.current = false;
+    //   console.log("rendering inside prevParams >  useEffect")
+    // } else {
       if (state?.category) {
         setCachedData({ isExists: false, data: null });
         writeToLoaclStore('cache', { isExists: false, data: null });
@@ -71,7 +71,7 @@ export const DrinksSearch = ({ search, updateState }) => {
         dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
         console.log("rendering inside prevParams > else > useEffect")
       }
-    }
+    // }
 
     // делает запрос за категориями и ингридиентами
     if (categoryList.length === 0) dispatch(fetchCategories());
@@ -79,12 +79,12 @@ export const DrinksSearch = ({ search, updateState }) => {
 
     // caching on leave page
     return () => {
-      setPrevParams({});
+      // setPrevParams({});
       dispatch(changeDrinksPage(1));
       dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
       writeToLoaclStore('cache', { isExists: true, data: entities });
       console.log("render inside leave page 'caching...'")
-      updateState('');
+      // updateState('');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
