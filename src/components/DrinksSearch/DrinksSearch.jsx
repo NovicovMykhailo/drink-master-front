@@ -24,7 +24,7 @@ import css from './DrinksSearch.module.css';
 export const DrinksSearch = () => {
   const dispatch = useDispatch();
   const isMounted = useRef(false);
-  const isHasBeenPrevParams = useRef(false);
+
 
   // console.log('search', search);
 
@@ -180,9 +180,9 @@ export const DrinksSearch = () => {
         />
       </form>
 
-      {entities?.length > 0 && !isLoading && !isHasBeenPrevParams.current && !cachedData?.isExists && (
+      {entities?.length > 0 && !isLoading &&  !cachedData?.isExists && (
         <ul className={css.drinkCardContainer}>
-          {entities.map(({ _id, drink, drinkThumb, ingredients }) => (
+          {entities?.map(({ _id, drink, drinkThumb, ingredients }) => (
             <DrinkItemCard key={_id} drink={drink} drinkThumb={drinkThumb} id={_id} popup={ingredients} />
           ))}
         </ul>
