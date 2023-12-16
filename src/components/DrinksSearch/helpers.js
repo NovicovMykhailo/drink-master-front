@@ -24,26 +24,31 @@ export function getObjFromParams(searchParams) {
 
   return params;
 }
-export function string2Params(string){
-  if(string === '') return
-  if(string.indexOf('?/') === -1){
-    debugger
-    const normalizedString = string.replace('drinks&', "?").replaceAll('~and~', "&").replaceAll('%2F','/').replaceAll('+', " ")
-    console.log("string", normalizedString)
-    const result = JSON.parse('{"' + decodeURI(normalizedString.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
-    console.log("result", result)
-    return result
-  }else return null
+
+
+//not used
+
+
+// export function string2Params(string){
+//   if(string === '') return
+//   if(string.indexOf('?/') === -1){
+//     debugger
+//     const normalizedString = string.replace('drinks&', "?").replaceAll('~and~', "&").replaceAll('%2F','/').replaceAll('+', " ")
+//     console.log("string", normalizedString)
+//     const result = JSON.parse('{"' + decodeURI(normalizedString.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+//     console.log("result", result)
+//     return result
+//   }else return null
  
-}
+// }
 
-export function findCategory(string, category){
+// export function findCategory(string, category){
 
-if(string.includes('+')){
-  return category.filter(item => item.value === string.replace('+', ' '))[0]
-} else if (string){
-  return category.filter(item => item.value === string)[0]
-}else return
-}
+// if(string.includes('+')){
+//   return category.filter(item => item.value === string.replace('+', ' '))[0]
+// } else if (string){
+//   return category.filter(item => item.value === string)[0]
+// }else return
+// }
   
 

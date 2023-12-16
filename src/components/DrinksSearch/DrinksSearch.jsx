@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
-// import { useParams } from 'react-router-dom/dist';
 import Select from 'react-select';
 // components
 import { Paginator } from 'components/Paginator/Paginator';
@@ -26,12 +25,10 @@ export const DrinksSearch = () => {
   const isMounted = useRef(false);
 
 
-  // console.log('search', search);
 
   const { categoryList, ingredientList, isLoading, entities, totalPages, currentPage } = useDrinks();
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [prevParams, setPrevParams] = useState(search ? search : null);
-  // console.log('DrinksSearch -> prevParams', prevParams);
+
 
   const [category, setCategory] = useState('');
   const [ingredient, setIngredient] = useState('');
@@ -44,21 +41,7 @@ export const DrinksSearch = () => {
 
   //init and reset on leave page and handle prevParams if they existed
   useEffect(() => {
-    // if (prevParams) {
-    //   //logic
 
-    //   setCachedData({ isExists: false, data: null });
-    //   writeToLoaclStore('cache', { isExists: false, data: null });
-    //   isHasBeenPrevParams.current = true;
-    //   setSearchParams(prevParams);
-    //   prevParams.category && setCategory(findCategory(prevParams.category, categoryOptions(categoryList)).value || '');
-    //   prevParams.ingredient && setIngredient(findCategory(prevParams.ingredient, ingredientOptions(ingredientList)).value || '');
-    //   prevParams.q && setQ(prevParams.q || '');
-    //   prevParams.page && dispatch(changeDrinksPage(Number(prevParams.page)));
-    //   dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
-    //   isHasBeenPrevParams.current = false;
-    //   console.log("rendering inside prevParams >  useEffect")
-    // } else {
       if (state?.category) {
         setCachedData({ isExists: false, data: null });
         writeToLoaclStore('cache', { isExists: false, data: null });
@@ -66,10 +49,10 @@ export const DrinksSearch = () => {
         searchParams.set('category', category);
         setSearchParams(searchParams);
         dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
-        console.log("rendering inside prevParams > state?.category > useEffect")
+       
       } else {
         dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
-        console.log("rendering inside prevParams > else > useEffect")
+       
       }
     // }
 
@@ -79,12 +62,11 @@ export const DrinksSearch = () => {
 
     // caching on leave page
     return () => {
-      // setPrevParams({});
       dispatch(changeDrinksPage(1));
       dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
       writeToLoaclStore('cache', { isExists: true, data: entities });
-      console.log("render inside leave page 'caching...'")
-      // updateState('');
+     
+
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -95,7 +77,7 @@ export const DrinksSearch = () => {
     if (readFromLocalStore('cache') && !cachedData?.isExists) {
       const { isExists, data } = readFromLocalStore('cache');
       setCachedData({ isExists, data });
-      console.log("rendering inside read cache useEffect")
+     
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,7 +97,7 @@ export const DrinksSearch = () => {
       dispatch(fetchDrinks({ category, page: currentPage, q, ingredient }));
       writeToLoaclStore('cache', { isExists: false, data: null });
       setCachedData({ isExists: false, data: null });
-      console.log("render Inside search form Useeffect")
+     
     }
     isMounted.current = true;
 
@@ -127,7 +109,7 @@ export const DrinksSearch = () => {
   const handleCategoryChange = e => {
     dispatch(changeDrinksPage(1));
     setSearchParams({ category: e.value });
-    console.log("render Inside hanglers Categories Useeffect")
+   
     setCategory(e.value);
   };
   // hanglers Ingredients
@@ -137,14 +119,14 @@ export const DrinksSearch = () => {
     setIngredient(e.value);
 
     setCategory(e.value);
-    console.log("render Inside hanglers Ingredients Useeffect")
+   
   };
   // hanglers Query
   const handleQChange = e => {
     dispatch(changeDrinksPage(1));
     setQ(e.target.value);
     setSearchParams({ q: e.target.value });
-    console.log("render Inside hanglers q Useeffect")
+    
   };
 
   return (
