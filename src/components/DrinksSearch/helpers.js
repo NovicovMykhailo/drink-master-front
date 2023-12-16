@@ -26,11 +26,14 @@ export function getObjFromParams(searchParams) {
 }
 export function string2Params(string){
   if(string === '') return
-  const normalizedString = string.replace('drinks&', "?").replaceAll('~and~', "&").replaceAll('%2F','/').replaceAll('+', " ")
-  console.log("string", normalizedString)
-  const result = JSON.parse('{"' + decodeURI(normalizedString.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
-  console.log("result", result)
-  return result
+  if(string.indexOf('?/') === -1){
+    const normalizedString = string.replace('drinks&', "?").replaceAll('~and~', "&").replaceAll('%2F','/').replaceAll('+', " ")
+    console.log("string", normalizedString)
+    const result = JSON.parse('{"' + decodeURI(normalizedString.substring(1).replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+    console.log("result", result)
+    return result
+  }else return null
+ 
 }
 
 export function findCategory(string, category){
